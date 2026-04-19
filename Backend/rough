@@ -1,0 +1,8 @@
+For run backend-----------
+uvicorn main:app --reload
+
+For Train data 
+python train_model.py
+
+# Vertual envormengt on kr
+.\venv\Scripts\activate
