@@ -54,11 +54,20 @@ async def predict_disease(file: UploadFile = File(...)):
         
         result = classes[predicted.item()]
         
-        return {
-            "status": "success",
-            "disease": result,
-            "confidence": f"{confidence * 100:.2f}%"
-        }
+        # 🔴 NAYA SMART REJECTION LOGIC YAHAN HAI 🔴
+        # confidence 0 se 1 ke beech hota hai. 0.70 ka matlab 70% accuracy.
+        if confidence < 0.70:
+            return {
+                "status": "error",
+                "message": "❌ This will not match with the training data set. Please upload related photos (Apple, Banana, Mango, Grape, Orange)."
+            }
+        else:
+            # ✅ Agar photo fruit ki hai aur model 70% se zyada sure hai
+            return {
+                "status": "success",
+                "disease": result,
+                "confidence": f"{confidence * 100:.2f}%"
+            }
         
     except Exception as e:
         return {"status": "error", "message": str(e)}
