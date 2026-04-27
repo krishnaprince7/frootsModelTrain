@@ -56,7 +56,7 @@ async def predict_disease(file: UploadFile = File(...)):
         
         # 🔴 NAYA SMART REJECTION LOGIC YAHAN HAI 🔴
         # confidence 0 se 1 ke beech hota hai. 0.70 ka matlab 70% accuracy.
-        if confidence < 0.80:
+        if confidence < 0.90:
             return {
                 "status": "error",
                 "message": "❌ This will not match with the training data set. Please upload related photos (Apple, Banana, Mango, Grape, Orange)."
